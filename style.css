@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+:root {
+    --bg-color: #050a0f;
+    --panel-bg: rgba(10, 18, 28, 0.85);
+    --primary-glow: #00f0ff;
+    --secondary-glow: #0088ff;
+    --text-main: #e0f8ff;
+    --text-muted: #4d88a3;
+    --alert: #ff2a2a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Share Tech Mono', 'Courier New', monospace;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    padding: 2rem;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Scanline Overlay Effect */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 10;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid var(--primary-glow);
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px -10px var(--primary-glow);
+}
+
+.sys-title {
+    font-size: 1.2rem;
+    color: var(--primary-glow);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.sys-title span {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.clearance {
+    color: var(--alert);
+    border: 1px solid var(--alert);
+    padding: 3px 8px;
+    font-size: 0.8rem;
+    animation: blink 2s infinite;
+}
+
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+}
+
+.panel {
+    background: var(--panel-bg);
+    border: 1px solid #1a365d;
+    padding: 20px;
+    position: relative;
+    box-shadow: inset 0 0 20px rgba(0, 136, 255, 0.05);
+    
+    /* Tambahkan transisi di sini agar gerakannya mulus */
+    transition: transform 0.5s ease-out, box-shadow 0.5s ease-out, border-color 0.5s ease-out;
+}
+
+/* Tambahkan baris baru ini untuk efek saat kursor melewati panel */
+.panel:hover {
+    transform: translateY(-6px); /* Mengangkat panel 6px ke atas */
+    box-shadow: 0 12px 30px rgba(0, 240, 255, 0.15), inset 0 0 25px rgba(0, 136, 255, 0.1); /* Bayangan neon di bawahnya */
+    border-color: var(--primary-glow); /* Garis pinggir menyala cyan */
+    z-index: 5; /* Memastikan panel yang di-hover tidak tertimpa elemen lain */
+}
+
+/* Tactical Corners */
+.panel::before, .panel::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-color: var(--primary-glow);
+    border-style: solid;
+    /* Transisi untuk sudutnya */
+    transition: box-shadow 0.3s ease-out; 
+}
+
+.panel::before {
+    top: -1px; left: -1px;
+    border-width: 2px 0 0 2px;
+}
+
+.panel::after {
+    bottom: -1px; right: -1px;
+    border-width: 0 2px 2px 0;
+}
+
+/* Efek ekstra: Sudut taktikal ikut menyala saat panel di-hover */
+.panel:hover::before, 
+.panel:hover::after {
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+
+/* Tactical Corners */
+.panel::before, .panel::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-color: var(--primary-glow);
+    border-style: solid;
+}
+
+.panel::before {
+    top: -1px; left: -1px;
+    border-width: 2px 0 0 2px;
+}
+
+.panel::after {
+    bottom: -1px; right: -1px;
+    border-width: 0 2px 2px 0;
+}
+
+.panel-title {
+    color: var(--primary-glow);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed var(--text-muted);
+    padding-bottom: 5px;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+.data-row {
+    margin-bottom: 15px;
+}
+
+.data-label {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6.3px;
+}
+
+.data-value {
+    font-size: 1rem;
+    color: var(--text-main);
+}
+
+.skill-bar {
+    width: 100%;
+    height: 6px;
+    background: #112;
+    margin-top: 5px;
+    border: 1px solid #1a365d;
+}
+
+.skill-fill {
+    height: 100%;
+    background: var(--primary-glow);
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+
+ul.tech-list {
+    list-style: none;
+}
+
+ul.tech-list li {
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 15px;
+}
+
+ul.tech-list li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: var(--primary-glow);
+}
+
+/* Animations */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Target Reticle Background for Main Profile */
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border: 1px solid var(--primary-glow);
+    margin: 0 auto 20px auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, rgba(0,240,255,0.1) 0%, transparent 70%);
+}
+
+.profile-pic::before {
+    content: '+';
+    color: var(--primary-glow);
+    font-size: 2rem;
+    position: absolute;
+}
+
+@media (max-width: 768px) {
+    .grid-layout {
+        grid-template-columns: 1fr;
+    }
+}
